@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rideinsync_client/features/user/choose_date/controllers/date_controller.dart';
+import 'package:rideinsync_client/features/user/choose_office/screens/choose_office_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class BookScheduleScreen extends StatefulWidget {
@@ -113,7 +114,9 @@ class _BookScheduleScreenState extends State<BookScheduleScreen> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const ChooseOfficeScreen());
+              },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 minimumSize: const Size(double.infinity, 45),
