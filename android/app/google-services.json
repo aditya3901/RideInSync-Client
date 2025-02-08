@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1085270252737",
+    "project_id": "rideinsync-2a7b4",
+    "storage_bucket": "rideinsync-2a7b4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085270252737:android:b727c1c3bcd5444aff8840",
+        "android_client_info": {
+          "package_name": "com.example.rideinsync_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085270252737-ul7o0dbhv3br0vm0doo0qqdm0861etmn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rideinsync_client",
+            "certificate_hash": "76652a3a071dd290312c77dcac5f4434869e90ca"
+          }
+        },
+        {
+          "client_id": "1085270252737-j34g4udvko7hf1h280i6ej85l8ucksli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnm1HJ_2RontOzl9MERs2oBcjzuCHCf5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085270252737-j34g4udvko7hf1h280i6ej85l8ucksli.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
