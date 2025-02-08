@@ -27,6 +27,7 @@ dependencies:
   pinput:
   image_picker:
   path:
+  table_calendar:
 
 dev_dependencies:
   flutter_test:
