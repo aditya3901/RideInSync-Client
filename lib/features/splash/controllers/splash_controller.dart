@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rideinsync_client/configure_dependency.dart';
 import 'package:rideinsync_client/features/auth/docs/screens/document_screen.dart';
 import 'package:rideinsync_client/features/launch/screens/launch_screen.dart';
+import 'package:rideinsync_client/features/user/schedule_ride/screens/schedule_rides_screen.dart';
 import 'package:rideinsync_client/models/driver_model.dart';
 import 'package:rideinsync_client/models/user_model.dart';
 import 'package:rideinsync_client/services/common_auth_service.dart';
@@ -29,7 +30,7 @@ class SplashController extends GetxController {
       );
 
       if (userDetailsResponse['verified'] == true) {
-        // Get to User Home
+        Get.offAll(() => const UserScheduleRides());
       } else {
         Get.offAll(() => const DocumentScreen(userType: "user"));
       }
