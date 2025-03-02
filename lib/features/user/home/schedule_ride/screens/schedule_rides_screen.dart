@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rideinsync_client/features/user/choose_date/screens/book_schedule_screen.dart';
+import 'package:rideinsync_client/features/user/booking/choose_date/screens/book_schedule_screen.dart';
 import 'package:rideinsync_client/features/user/drawer/screens/user_drawer.dart';
 import '../widgets/ride_card.dart';
 

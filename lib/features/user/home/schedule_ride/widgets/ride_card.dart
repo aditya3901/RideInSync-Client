@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rideinsync_client/features/user/schedule_ride/widgets/location_joiner.dart';
-import 'package:rideinsync_client/features/user/schedule_ride/widgets/ride_buttons.dart';
+import './location_joiner.dart';
+import './ride_buttons.dart';
 
 class RideCard extends StatefulWidget {
   const RideCard({Key? key}) : super(key: key);

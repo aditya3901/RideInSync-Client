@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rideinsync_client/features/user/choose_date/controllers/date_controller.dart';
-import 'package:rideinsync_client/features/user/choose_office/screens/choose_office_screen.dart';
+import '..//controllers/date_controller.dart';
+import '../../choose_office/screens/choose_office_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class BookScheduleScreen extends StatefulWidget {

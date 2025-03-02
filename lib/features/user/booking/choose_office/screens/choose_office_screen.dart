@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../choose_time/screens/choose_time_screen.dart';
 
 class ChooseOfficeScreen extends StatefulWidget {
   const ChooseOfficeScreen({Key? key}) : super(key: key);
@@ -74,7 +76,9 @@ class _ChooseOfficeScreenState extends State<ChooseOfficeScreen> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const ChooseTimeScreen());
+              },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 minimumSize: const Size(double.infinity, 45),
