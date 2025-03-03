@@ -16,6 +16,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final type = TextEditingController(text: "user");
   final _nameController = TextEditingController();
+  final _companyController = TextEditingController();
   final _vehicleModelController = TextEditingController();
   final _vehicleNumberController = TextEditingController();
 
@@ -163,7 +164,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ],
                           )
-                        : Container(),
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Enter your company details',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              inputField(
+                                "Enter your company name",
+                                TextInputType.text,
+                                _companyController,
+                              ),
+                            ],
+                          ),
                   ],
                 ),
               ),
@@ -175,6 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         onPressed: () {
           _controller.register(
             name: _nameController.text,
+            company: _companyController.text,
             vehicleModel: _vehicleModelController.text,
             vehicleNumber: _vehicleNumberController.text,
             type: type.text,

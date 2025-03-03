@@ -17,6 +17,7 @@ class RegisterController extends GetxController {
 
   Future<void> register({
     required String name,
+    required String company,
     required String vehicleModel,
     required String vehicleNumber,
     required String type,
@@ -37,6 +38,7 @@ class RegisterController extends GetxController {
       'deviceId': deviceId,
       'deviceType': deviceType,
       'deviceToken': deviceFCMToken,
+      'company': company,
     };
 
     if (type == 'driver') {

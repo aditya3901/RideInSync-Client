@@ -1,10 +1,18 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiUrl {
   static const String baseUrl = 'https://rideinsync-gateway.onrender.com';
   // static const String baseUrl = 'http://192.168.29.10:3000';
 
   // Common Endpoints
-  static const String cloudinaryUpload =
-      'https://api.cloudinary.com/v1_1/dczqdfqhy/upload';
+  static final String cloudinaryUpload =
+      'https://api.cloudinary.com/v1_1/${dotenv.env['CLOUDINARY_API_KEY']}/upload';
+
+  static final String googleAutoComplete =
+      'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${dotenv.env['GOOGLE_PLACES_API_KEY']}&input=';
+  static final String googlePlaceDetails =
+      'https://maps.googleapis.com/maps/api/place/details/json?key=${dotenv.env['GOOGLE_PLACES_API_KEY']}&place_id=';
+
   static const String verifyEmail = '$baseUrl/auth/common/verifyEmail';
 
   // User Endpoints

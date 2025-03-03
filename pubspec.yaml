@@ -28,6 +28,8 @@ dependencies:
   image_picker:
   path:
   table_calendar:
+  google_maps_flutter:
+  flutter_dotenv:
 
 dev_dependencies:
   flutter_test:
@@ -41,6 +43,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
+    - config.env
 
   fonts:
     - family: Satoshi

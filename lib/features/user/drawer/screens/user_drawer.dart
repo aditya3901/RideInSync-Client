@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rideinsync_client/features/user/drawer_screens/update_location/screens/address_change_screen.dart';
 import '../controllers/drawer_controller.dart';
 import '../widgets/drawer_item.dart';
 
@@ -71,8 +72,8 @@ class _UserDrawerState extends State<UserDrawer> {
                     ),
                     buildDrawerItem(
                       Icons.edit_location,
-                      "Update Pickup/Drop Point",
-                      null,
+                      "Request Address Change",
+                      AddressChangeScreen(),
                     ),
                     buildDrawerItem(
                       Icons.help,
