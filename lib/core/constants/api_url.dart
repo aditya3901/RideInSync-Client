@@ -12,6 +12,8 @@ class ApiUrl {
       'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${dotenv.env['GOOGLE_PLACES_API_KEY']}&input=';
   static final String googlePlaceDetails =
       'https://maps.googleapis.com/maps/api/place/details/json?key=${dotenv.env['GOOGLE_PLACES_API_KEY']}&place_id=';
+  static final String googleGeocode =
+      'https://maps.googleapis.com/maps/api/geocode/json?key=${dotenv.env['GOOGLE_PLACES_API_KEY']}&result_type=street_address&location_type=ROOFTOP&latlng=';
 
   static const String verifyEmail = '$baseUrl/auth/common/verifyEmail';
 

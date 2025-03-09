@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rideinsync_client/configure_dependency.dart';
-import 'package:rideinsync_client/services/location_autocomplete_service.dart';
+import 'package:rideinsync_client/services/google_location_service.dart';
 
 class LocationAutoCompleteController extends GetxController {
-  final _locationService = locator<LocationAutoCompleteService>();
+  final _locationService = locator<GoogleLocationService>();
 
   var suggestions = <Map<String, dynamic>>[].obs;
+  var selectedLocation = Rx<Map<String, dynamic>?>(null);
   var isLoading = false.obs;
   final searchController = TextEditingController();
 
@@ -23,7 +24,8 @@ class LocationAutoCompleteController extends GetxController {
     }, query);
   }
 
-  Future<Map<String, dynamic>?> fetchLocationDetails(String placeId) async {
-    return await _locationService.fetchPlaceDetails(placeId);
+  void onSuggestionTap(String placeId) async {
+    selectedLocation.value = await _locationService.fetchPlaceDetails(placeId);
+    searchController.text = selectedLocation.value!['address'];
   }
 }

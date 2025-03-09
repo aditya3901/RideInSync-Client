@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:rideinsync_client/core/constants/api_url.dart';
 
-class LocationAutoCompleteService {
+class GoogleLocationService {
   final Duration debounceDuration = const Duration(milliseconds: 500);
   Timer? _debounceTimer;
   final Map<String, List<Map<String, dynamic>>> _cache = {};
@@ -16,7 +16,7 @@ class LocationAutoCompleteService {
     }
 
     final response = await http.get(
-      Uri.parse(ApiUrl.googleAutoComplete + query),
+      Uri.parse("${ApiUrl.googleAutoComplete}$query"),
     );
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -38,7 +38,7 @@ class LocationAutoCompleteService {
 
   Future<Map<String, dynamic>?> fetchPlaceDetails(String placeId) async {
     final response = await http.get(
-      Uri.parse(ApiUrl.googlePlaceDetails + placeId),
+      Uri.parse("${ApiUrl.googlePlaceDetails}$placeId"),
     );
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -51,6 +51,27 @@ class LocationAutoCompleteService {
         };
       }
     }
+    return null;
+  }
+
+  Future<Map<String, dynamic>?> fetchAddressFromLatLng(
+    double lat,
+    double lng,
+  ) async {
+    final response = await http.get(
+      Uri.parse("${ApiUrl.googleGeocode}$lat,$lng"),
+    );
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data["status"] == "OK") {
+        final result = data["results"][0];
+        return {
+          "address": result["formatted_address"],
+          "place_id": result["place_id"],
+        };
+      }
+    }
+
     return null;
   }
 

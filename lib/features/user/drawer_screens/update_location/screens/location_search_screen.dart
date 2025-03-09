@@ -68,7 +68,7 @@ class LocationSearchScreen extends StatelessWidget {
                         ),
                       ),
                       leading: const Icon(Icons.location_on),
-                      onTap: () => controller.fetchLocationDetails(
+                      onTap: () => controller.onSuggestionTap(
                         suggestion["place_id"],
                       ),
                     );

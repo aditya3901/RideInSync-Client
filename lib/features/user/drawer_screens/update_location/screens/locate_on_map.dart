@@ -37,7 +37,8 @@ class _LocateOnMapScreenState extends State<LocateOnMapScreen> {
         children: [
           Expanded(
             child: Obx(() {
-              if (controller.currentPosition.value == null) {
+              if (controller.currentPosition.value == null ||
+                  controller.markers.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
               }
               return GoogleMap(
@@ -62,8 +63,16 @@ class _LocateOnMapScreenState extends State<LocateOnMapScreen> {
                   "Primary Address",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const Text(
-                    "Manbhum - Around the Grove, White Field Rd, Ashok Nagar, Whitefields, Kondapur, Telangana 500081, India"),
+                Obx(() {
+                  if (controller.currentAddress.value == null) {
+                    return const Text("Fetching...");
+                  }
+                  return Text(
+                    controller.currentAddress.value!["address"],
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  );
+                }),
                 const SizedBox(height: 8),
                 const Text(
                   "Geocode",
