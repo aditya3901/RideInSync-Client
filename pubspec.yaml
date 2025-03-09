@@ -29,6 +29,7 @@ dependencies:
   path:
   table_calendar:
   google_maps_flutter:
+  geolocator:
   flutter_dotenv:
 
 dev_dependencies:

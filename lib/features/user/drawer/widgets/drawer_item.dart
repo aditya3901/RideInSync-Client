@@ -17,7 +17,7 @@ Widget buildDrawerItem(
       if (logout) {
         drawerController!.logout();
       } else if (page != null) {
-        Get.to(page);
+        Get.to(() => page);
       }
     },
   );

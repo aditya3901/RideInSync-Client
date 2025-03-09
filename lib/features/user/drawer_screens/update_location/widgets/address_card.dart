@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rideinsync_client/features/user/drawer_screens/update_location/screens/locate_on_map.dart';
+import 'package:rideinsync_client/features/user/drawer_screens/update_location/screens/location_search_screen.dart';
 
 class AddressCard extends StatelessWidget {
   final String title;
@@ -38,10 +39,13 @@ class AddressCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Icon(
-                  Icons.edit,
-                  color: Colors.deepOrangeAccent,
-                  size: 20,
+                InkWell(
+                  onTap: () => Get.to(() => LocationSearchScreen()),
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.deepOrangeAccent,
+                    size: 20,
+                  ),
                 ),
               ],
             ),

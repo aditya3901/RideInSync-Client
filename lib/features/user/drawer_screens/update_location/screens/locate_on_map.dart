@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rideinsync_client/features/user/drawer_screens/update_location/controllers/locate_on_map_controller.dart';
 import 'package:rideinsync_client/features/user/drawer_screens/update_location/screens/edit_address_screen.dart';
 
 class LocateOnMapScreen extends StatefulWidget {
@@ -12,26 +13,12 @@ class LocateOnMapScreen extends StatefulWidget {
 }
 
 class _LocateOnMapScreenState extends State<LocateOnMapScreen> {
-  LatLng _currentPosition = LatLng(17.452898, 78.367304);
-  Set<Marker> _markers = {};
+  final controller = Get.put(LocateOnMapController());
 
   @override
   void initState() {
     super.initState();
-    _setMarker(_currentPosition);
-  }
-
-  void _setMarker(LatLng position) {
-    setState(() {
-      _currentPosition = position;
-      _markers.clear();
-      _markers.add(
-        Marker(
-          markerId: const MarkerId("currentLocation"),
-          position: position,
-        ),
-      );
-    });
+    controller.determineInitPosition();
   }
 
   @override
@@ -49,17 +36,22 @@ class _LocateOnMapScreenState extends State<LocateOnMapScreen> {
       body: Column(
         children: [
           Expanded(
-            child: GoogleMap(
-              zoomControlsEnabled: false,
-              initialCameraPosition: CameraPosition(
-                target: _currentPosition,
-                zoom: 15.0,
-              ),
-              markers: _markers,
-              onTap: (LatLng position) {
-                _setMarker(position);
-              },
-            ),
+            child: Obx(() {
+              if (controller.currentPosition.value == null) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return GoogleMap(
+                zoomControlsEnabled: false,
+                initialCameraPosition: CameraPosition(
+                  target: controller.currentPosition.value!,
+                  zoom: 15.0,
+                ),
+                markers: controller.markers,
+                onTap: (LatLng position) {
+                  controller.setMarker(position);
+                },
+              );
+            }),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -77,8 +69,13 @@ class _LocateOnMapScreenState extends State<LocateOnMapScreen> {
                   "Geocode",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(
-                    "${_currentPosition.latitude.toStringAsFixed(6)}, ${_currentPosition.longitude.toStringAsFixed(6)}"),
+                Obx(() {
+                  if (controller.currentPosition.value == null) {
+                    return const Text("Fetching...");
+                  }
+                  return Text(
+                      "${controller.currentPosition.value!.latitude.toStringAsFixed(6)}, ${controller.currentPosition.value!.longitude.toStringAsFixed(6)}");
+                }),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

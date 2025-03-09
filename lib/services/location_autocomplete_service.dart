@@ -6,9 +6,9 @@ import 'package:rideinsync_client/core/constants/api_url.dart';
 class LocationAutoCompleteService {
   final Duration debounceDuration = const Duration(milliseconds: 500);
   Timer? _debounceTimer;
-  final Map<String, List<Map<String, String>>> _cache = {};
+  final Map<String, List<Map<String, dynamic>>> _cache = {};
 
-  Future<List<Map<String, String>>> fetchPlaceSuggestions(String query) async {
+  Future<List<Map<String, dynamic>>> fetchPlaceSuggestions(String query) async {
     if (query.isEmpty) return [];
 
     if (_cache.containsKey(query)) {
@@ -21,9 +21,10 @@ class LocationAutoCompleteService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       if (data["status"] == "OK") {
-        List<Map<String, String>> suggestions = data["predictions"]
-            .map<Map<String, String>>((item) => {
-                  "description": item["description"],
+        List<Map<String, dynamic>> suggestions = data["predictions"]
+            .map<Map<String, dynamic>>((item) => {
+                  "main": item["structured_formatting"]["main_text"],
+                  "secondary": item["structured_formatting"]["secondary_text"],
                   "place_id": item["place_id"],
                 })
             .toList();
