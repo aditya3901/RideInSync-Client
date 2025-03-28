@@ -2,10 +2,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rideinsync_client/configure_dependency.dart';
+import 'package:rideinsync_client/features/user/drawer_screens/update_location/controllers/edit_address_controller.dart';
 import 'package:rideinsync_client/services/google_location_service.dart';
+import '../screens/edit_address_screen.dart';
 
 class LocateOnMapController extends GetxController {
   final _locationService = locator<GoogleLocationService>();
+  final editAddressController = Get.put(EditAddressController());
 
   var currentPosition = Rx<LatLng?>(null);
   var currentAddress = Rx<Map<String, dynamic>?>(null);
@@ -59,5 +62,14 @@ class LocateOnMapController extends GetxController {
       position.latitude,
       position.longitude,
     );
+  }
+
+  void onLocationSelected() {
+    editAddressController.currentPosition = currentPosition.value!;
+    editAddressController.selectedLocation = currentAddress.value!;
+    editAddressController.addressController.text =
+        currentAddress.value!['address'];
+
+    Get.to(() => const EditAddressPage());
   }
 }

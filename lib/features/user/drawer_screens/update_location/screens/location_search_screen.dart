@@ -28,6 +28,9 @@ class LocationSearchScreen extends StatelessWidget {
               TextField(
                 controller: controller.searchController,
                 onChanged: controller.onSearchChanged,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
                 decoration: InputDecoration(
                   hintText: "Search for a location...",
                   border: OutlineInputBorder(

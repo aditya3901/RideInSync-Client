@@ -48,6 +48,7 @@ class GoogleLocationService {
           "lat": location["lat"],
           "lng": location["lng"],
           "address": data["result"]["formatted_address"],
+          "place_id": placeId,
         };
       }
     }
@@ -66,6 +67,8 @@ class GoogleLocationService {
       if (data["status"] == "OK") {
         final result = data["results"][0];
         return {
+          "lat": lat,
+          "lng": lng,
           "address": result["formatted_address"],
           "place_id": result["place_id"],
         };
@@ -78,5 +81,33 @@ class GoogleLocationService {
   void debounce(Function callback, String query) {
     _debounceTimer?.cancel();
     _debounceTimer = Timer(debounceDuration, () => callback(query));
+  }
+
+  Future<Map<String, dynamic>> setUserLocation(
+    String token,
+    Map<String, dynamic> location,
+  ) async {
+    final response = await http.post(
+      Uri.parse("ApiUrl.userLocation"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(location),
+    );
+
+    return jsonDecode(response.body);
+  }
+
+  Future<Map<String, dynamic>> getUserLocation(String token) async {
+    final response = await http.get(
+      Uri.parse("ApiUrl.userLocation"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    return jsonDecode(response.body);
   }
 }

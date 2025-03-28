@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rideinsync_client/features/user/drawer_screens/update_location/screens/locate_on_map.dart';
-import 'package:rideinsync_client/features/user/drawer_screens/update_location/screens/location_search_screen.dart';
+import 'package:rideinsync_client/features/user/drawer_screens/update_location/controllers/edit_address_controller.dart';
+import '../screens/location_search_screen.dart';
 
 class AddressCard extends StatelessWidget {
+  final String type;
   final String title;
   final String address;
   final String geocode;
   final String shuttleStop;
 
-  AddressCard(
-      {required this.title,
-      required this.address,
-      required this.geocode,
-      required this.shuttleStop});
+  AddressCard({
+    Key? key,
+    required this.type,
+    required this.title,
+    required this.address,
+    required this.geocode,
+    required this.shuttleStop,
+  }) : super(key: key);
+
+  final editAddressController = Get.put(EditAddressController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +27,10 @@ class AddressCard extends StatelessWidget {
       elevation: 6,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,7 +43,10 @@ class AddressCard extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => Get.to(() => LocationSearchScreen()),
+                  onTap: () {
+                    editAddressController.locationType = type;
+                    Get.to(() => LocationSearchScreen());
+                  },
                   child: const Icon(
                     Icons.edit,
                     color: Colors.deepOrangeAccent,
@@ -76,22 +82,6 @@ class AddressCard extends StatelessWidget {
                   color: Colors.grey),
             ),
             Text(shuttleStop, style: const TextStyle(fontSize: 12)),
-            const SizedBox(height: 12),
-            Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                onPressed: () {
-                  Get.to(() => LocateOnMapScreen());
-                },
-                child: const Text(
-                  "VIEW ON MAP",
-                  style: TextStyle(
-                    color: Colors.deepOrangeAccent,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),

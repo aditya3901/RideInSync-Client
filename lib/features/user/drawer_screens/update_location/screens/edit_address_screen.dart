@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../controllers/edit_address_controller.dart';
 
 class EditAddressPage extends StatefulWidget {
+  const EditAddressPage({Key? key}) : super(key: key);
+
   @override
   _EditAddressPageState createState() => _EditAddressPageState();
 }
 
 class _EditAddressPageState extends State<EditAddressPage> {
-  final LatLng _initialPosition = LatLng(17.452898, 78.367304);
-  final TextEditingController _addressController = TextEditingController(
-      text: "Manbhum - Around the Grove, White Field Rd, Ashok Nagar, "
-          "Whitefields, Kondapur, Telangana 500081, India");
-  final TextEditingController _landmarkController =
-      TextEditingController(text: "White Fields");
+  final controller = Get.put(EditAddressController());
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +48,21 @@ class _EditAddressPageState extends State<EditAddressPage> {
                           borderRadius: BorderRadius.circular(10),
                           child: GoogleMap(
                             zoomControlsEnabled: false,
+                            zoomGesturesEnabled: false,
+                            scrollGesturesEnabled: false,
+                            rotateGesturesEnabled: false,
+                            tiltGesturesEnabled: false,
+                            myLocationButtonEnabled: false,
+                            compassEnabled: false,
+                            mapToolbarEnabled: false,
                             initialCameraPosition: CameraPosition(
-                              target: _initialPosition,
+                              target: controller.currentPosition!,
                               zoom: 15,
                             ),
                             markers: {
                               Marker(
-                                markerId: MarkerId("home"),
-                                position: _initialPosition,
+                                markerId: const MarkerId("home"),
+                                position: controller.currentPosition!,
                               ),
                             },
                           ),
@@ -69,7 +75,7 @@ class _EditAddressPageState extends State<EditAddressPage> {
                       ),
                       const SizedBox(height: 6),
                       TextField(
-                        controller: _addressController,
+                        controller: controller.addressController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           contentPadding:
@@ -84,7 +90,9 @@ class _EditAddressPageState extends State<EditAddressPage> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 6),
-                      const Text("17.452898,78.367304"),
+                      Text(
+                        "${controller.currentPosition!.latitude.toStringAsFixed(6)}, ${controller.currentPosition!.longitude.toStringAsFixed(6)}",
+                      ),
                       const SizedBox(height: 16),
                       const Text(
                         "Landmark and Area",
@@ -92,8 +100,9 @@ class _EditAddressPageState extends State<EditAddressPage> {
                       ),
                       const SizedBox(height: 6),
                       TextField(
-                        controller: _landmarkController,
+                        controller: controller.landmarkController,
                         decoration: const InputDecoration(
+                          hintText: "Landmark and Area",
                           border: OutlineInputBorder(),
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 12, vertical: 8),

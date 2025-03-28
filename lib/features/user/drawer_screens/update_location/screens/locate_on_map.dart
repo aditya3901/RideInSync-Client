@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rideinsync_client/features/user/drawer_screens/update_location/controllers/locate_on_map_controller.dart';
-import 'package:rideinsync_client/features/user/drawer_screens/update_location/screens/edit_address_screen.dart';
 
 class LocateOnMapScreen extends StatefulWidget {
   const LocateOnMapScreen({Key? key}) : super(key: key);
@@ -103,9 +102,7 @@ class _LocateOnMapScreenState extends State<LocateOnMapScreen> {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {
-                    Get.to(() => EditAddressPage());
-                  },
+                  onPressed: () => controller.onLocationSelected(),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 48),
                     shape: RoundedRectangleBorder(
