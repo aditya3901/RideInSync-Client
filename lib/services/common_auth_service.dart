@@ -15,6 +15,17 @@ class CommonAuthService {
     return jsonDecode(response.body);
   }
 
+  Future<Map<String, dynamic>> getCompanies() async {
+    final response = await http.get(
+      Uri.parse(ApiUrl.getCompanies),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    return jsonDecode(response.body);
+  }
+
   Future<Map<String, dynamic>> register(
     String type,
     Map<String, dynamic> reqBody,

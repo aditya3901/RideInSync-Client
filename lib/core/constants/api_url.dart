@@ -16,6 +16,7 @@ class ApiUrl {
       'https://maps.googleapis.com/maps/api/geocode/json?key=${dotenv.env['GOOGLE_PLACES_API_KEY']}&result_type=street_address&location_type=ROOFTOP&latlng=';
 
   static const String verifyEmail = '$baseUrl/auth/common/verifyEmail';
+  static const String getCompanies = '$baseUrl/admin/getAllCompany';
 
   // User Endpoints
   static const String userRegister = '$baseUrl/auth/user/register';
@@ -24,6 +25,7 @@ class ApiUrl {
   static const String userGetDocs = '$baseUrl/auth/user/getDocs';
   static const String userUploadDocs = '$baseUrl/auth/user/uploadDocs';
   static const String userDetails = '$baseUrl/auth/user/details';
+  static const String userAddress = '$baseUrl/auth/user/address';
 
   // Driver Endpoints
   static const String driverRegister = '$baseUrl/auth/driver/register';

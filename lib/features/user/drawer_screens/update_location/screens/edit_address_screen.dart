@@ -118,9 +118,11 @@ class _EditAddressPageState extends State<EditAddressPage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.submitUserLocation();
+                    },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 50),
+                      minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

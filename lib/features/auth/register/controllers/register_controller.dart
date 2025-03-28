@@ -6,18 +6,30 @@ import 'package:get/get.dart';
 import 'package:rideinsync_client/configure_dependency.dart';
 import 'package:rideinsync_client/features/auth/docs/screens/document_screen.dart';
 import 'package:rideinsync_client/features/launch/screens/launch_screen.dart';
+import 'package:rideinsync_client/models/company_model.dart';
 import 'package:rideinsync_client/models/driver_model.dart';
 import 'package:rideinsync_client/models/user_model.dart';
 import 'package:rideinsync_client/services/common_auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterController extends GetxController {
-  var isLoading = false.obs;
+  var isLoading = true.obs;
   final _authService = locator<CommonAuthService>();
+  var companies = <Company>[].obs;
+  var selectedCompany = Company().obs;
+
+  Future<void> getCompanies() async {
+    final response = await _authService.getCompanies();
+    companies.value = response['companies']
+        .map<Company>((company) => Company.fromJson(company))
+        .toList() as List<Company>;
+
+    selectedCompany.value = companies.first;
+    isLoading.value = false;
+  }
 
   Future<void> register({
     required String name,
-    required String company,
     required String vehicleModel,
     required String vehicleNumber,
     required String type,
@@ -35,10 +47,10 @@ class RegisterController extends GetxController {
       'name': name,
       'email': user!.email,
       'mobile': user.phoneNumber,
-      'deviceId': deviceId,
+      'deviceID': deviceId,
       'deviceType': deviceType,
       'deviceToken': deviceFCMToken,
-      'company': company,
+      'company_id': selectedCompany.value.sId,
     };
 
     if (type == 'driver') {

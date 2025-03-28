@@ -88,7 +88,7 @@ class GoogleLocationService {
     Map<String, dynamic> location,
   ) async {
     final response = await http.post(
-      Uri.parse("ApiUrl.userLocation"),
+      Uri.parse(ApiUrl.userAddress),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -99,9 +99,10 @@ class GoogleLocationService {
     return jsonDecode(response.body);
   }
 
-  Future<Map<String, dynamic>> getUserLocation(String token) async {
+  Future<Map<String, dynamic>> getUserLocation(
+      String token, String type) async {
     final response = await http.get(
-      Uri.parse("ApiUrl.userLocation"),
+      Uri.parse('${ApiUrl.userAddress}?type=$type'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rideinsync_client/features/auth/register/controllers/register_controller.dart';
+import 'package:rideinsync_client/models/company_model.dart';
 import '../widgets/input_field.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -16,9 +17,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final type = TextEditingController(text: "user");
   final _nameController = TextEditingController();
-  final _companyController = TextEditingController();
   final _vehicleModelController = TextEditingController();
   final _vehicleNumberController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.getCompanies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -175,11 +181,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              inputField(
-                                "Enter your company name",
-                                TextInputType.text,
-                                _companyController,
-                              ),
+                              _controller.companies.isEmpty
+                                  ? Container()
+                                  : DropdownButtonFormField(
+                                      value: _controller.selectedCompany.value,
+                                      onChanged: (value) {
+                                        _controller.selectedCompany.value =
+                                            value as Company;
+                                      },
+                                      items: _controller.companies
+                                          .map(
+                                            (company) => DropdownMenuItem(
+                                              value: company,
+                                              child: Text(company.name!),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                             ],
                           ),
                   ],
@@ -193,7 +211,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         onPressed: () {
           _controller.register(
             name: _nameController.text,
-            company: _companyController.text,
             vehicleModel: _vehicleModelController.text,
             vehicleNumber: _vehicleNumberController.text,
             type: type.text,
