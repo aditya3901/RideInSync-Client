@@ -19,7 +19,7 @@ class EditAddressController extends GetxController {
 
   void submitUserLocation() async {
     final prefs = await SharedPreferences.getInstance();
-    final user = UserModel.fromJson(
+    final userModel = UserModel.fromJson(
       jsonDecode(prefs.getString("user")!),
     );
 
@@ -27,10 +27,33 @@ class EditAddressController extends GetxController {
     selectedLocation["landmark"] = landmarkController.text;
     selectedLocation["type"] = locationType;
 
-    await _locationService.setUserLocation(
-      user.token!,
+    final response = await _locationService.setUserLocation(
+      userModel.token!,
       selectedLocation,
     );
+
+    if (response["status"] == "success") {
+      final location = Location(
+        type: "Point",
+        address: selectedLocation["address"],
+        landmark: selectedLocation["landmark"],
+        placeId: selectedLocation["place_id"],
+        coordinates: [selectedLocation["lng"], selectedLocation["lat"]],
+      );
+
+      if (locationType == 'primary') {
+        userModel.user!.primaryAddress = location;
+      } else {
+        userModel.user!.secondaryAddress = location;
+      }
+
+      prefs.setString("user", jsonEncode(userModel.toJson()));
+    } else {
+      Get.snackbar(
+        "Error",
+        "Failed to update location, please try again!",
+      );
+    }
 
     Get.offAll(() => const UserScheduleRides());
   }

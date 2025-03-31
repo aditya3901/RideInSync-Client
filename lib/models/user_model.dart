@@ -30,19 +30,22 @@ class User {
   String? deviceId;
   String? deviceType;
   String? deviceToken;
-  Location? location;
+  Location? primaryAddress;
+  Location? secondaryAddress;
   bool? verified;
 
-  User(
-      {this.name,
-      this.email,
-      this.mobile,
-      this.company,
-      this.deviceId,
-      this.deviceType,
-      this.deviceToken,
-      this.location,
-      this.verified});
+  User({
+    this.name,
+    this.email,
+    this.mobile,
+    this.company,
+    this.deviceId,
+    this.deviceType,
+    this.deviceToken,
+    this.primaryAddress,
+    this.secondaryAddress,
+    this.verified,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -52,10 +55,12 @@ class User {
     deviceId = json['device_id'];
     deviceType = json['device_type'];
     deviceToken = json['device_token'];
-    location =
-        (json['location'] != null && json['location']['coordinates'] != null)
-            ? Location.fromJson(json['location'])
-            : null;
+    primaryAddress = (json['primary_address'] != null)
+        ? Location.fromJson(json['primary_address'])
+        : null;
+    secondaryAddress = (json['secondary_address'] != null)
+        ? Location.fromJson(json['secondary_address'])
+        : null;
     verified = json['verified'];
   }
 
@@ -68,8 +73,11 @@ class User {
     data['device_id'] = deviceId;
     data['device_type'] = deviceType;
     data['device_token'] = deviceToken;
-    if (location != null) {
-      data['location'] = location!.toJson();
+    if (primaryAddress != null) {
+      data['primary_address'] = primaryAddress!.toJson();
+    }
+    if (secondaryAddress != null) {
+      data['secondary_address'] = secondaryAddress!.toJson();
     }
     data['verified'] = verified;
     return data;
@@ -79,18 +87,33 @@ class User {
 class Location {
   String? type;
   List<double>? coordinates;
+  String? address;
+  String? landmark;
+  String? placeId;
 
-  Location({this.type, this.coordinates});
+  Location({
+    this.type,
+    this.coordinates,
+    this.address,
+    this.landmark,
+    this.placeId,
+  });
 
   Location.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     coordinates = json['coordinates'].cast<double>();
+    address = json['address'];
+    landmark = json['landmark'];
+    placeId = json['place_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['type'] = type;
     data['coordinates'] = coordinates;
+    data['address'] = address;
+    data['landmark'] = landmark;
+    data['place_id'] = placeId;
     return data;
   }
 }

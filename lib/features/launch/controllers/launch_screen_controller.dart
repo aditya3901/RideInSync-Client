@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:rideinsync_client/configure_dependency.dart';
 import 'package:rideinsync_client/features/auth/docs/screens/document_screen.dart';
 import 'package:rideinsync_client/features/auth/phone/screens/enter_phone_screen.dart';
+import 'package:rideinsync_client/features/user/home/schedule_ride/screens/schedule_rides_screen.dart';
 import 'package:rideinsync_client/models/driver_model.dart';
 import 'package:rideinsync_client/models/user_model.dart';
 import 'package:rideinsync_client/services/common_auth_service.dart';
@@ -54,7 +55,7 @@ class LaunchScreenController extends GetxController {
       prefs.setString("user", jsonEncode(userModel.toJson()));
 
       if (userModel.user!.verified!) {
-        // Get to User Home
+        Get.offAll(() => const UserScheduleRides());
       } else {
         Get.offAll(() => const DocumentScreen(userType: "user"));
       }
