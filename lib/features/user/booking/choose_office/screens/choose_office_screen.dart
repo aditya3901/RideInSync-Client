@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../choose_time/screens/choose_time_screen.dart';
 import '../controllers/office_controller.dart';
 
 class ChooseOfficeScreen extends StatefulWidget {
@@ -12,7 +11,6 @@ class ChooseOfficeScreen extends StatefulWidget {
 
 class _ChooseOfficeScreenState extends State<ChooseOfficeScreen> {
   final controller = Get.put(OfficeController());
-  String? _selectedItem;
 
   @override
   void initState() {
@@ -58,10 +56,10 @@ class _ChooseOfficeScreenState extends State<ChooseOfficeScreen> {
                               ),
                             ),
                             value: controller.officeList[index].sId!,
-                            groupValue: _selectedItem,
+                            groupValue: controller.selectedItem.value,
                             onChanged: (value) {
                               setState(() {
-                                _selectedItem = value;
+                                controller.selectedItem.value = value!;
                               });
                             },
                           ),
@@ -78,7 +76,7 @@ class _ChooseOfficeScreenState extends State<ChooseOfficeScreen> {
                         horizontal: 16, vertical: 10),
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.to(() => const ChooseTimeScreen());
+                        controller.onNextClick();
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0,

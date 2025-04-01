@@ -18,6 +18,7 @@ class ApiUrl {
   static const String verifyEmail = '$baseUrl/auth/common/verifyEmail';
   static const String getCompanies = '$baseUrl/admin/getAllCompany';
   static const String getOffices = '$baseUrl/admin/getOffice';
+  static const String getTimeslots = '$baseUrl/admin/getTimeslots';
 
   // User Endpoints
   static const String userRegister = '$baseUrl/auth/user/register';
