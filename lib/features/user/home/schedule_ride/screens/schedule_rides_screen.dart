@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rideinsync_client/features/user/booking/choose_date/screens/book_schedule_screen.dart';
 import 'package:rideinsync_client/features/user/drawer/screens/user_drawer.dart';
+import '../controllers/rides_controller.dart';
 import '../widgets/ride_card.dart';
 
 class UserScheduleRides extends StatefulWidget {
@@ -12,6 +12,8 @@ class UserScheduleRides extends StatefulWidget {
 }
 
 class _UserScheduleRidesState extends State<UserScheduleRides> {
+  final _controller = Get.put(RidesController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,14 +34,14 @@ class _UserScheduleRidesState extends State<UserScheduleRides> {
         ],
       ),
       body: Column(
-        children: [
+        children: const [
           RideCard(),
           RideCard(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => const BookScheduleScreen());
+          _controller.scheduleRide();
         },
         child: const Icon(Icons.add),
       ),
