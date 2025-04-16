@@ -32,4 +32,30 @@ class BookingService {
 
     return jsonDecode(response.body);
   }
+
+  Future<Map<String, dynamic>> bookRide({
+    required String token,
+    required bool isLogin,
+    required String date,
+    required String officeId,
+    required String timeslotId,
+    required String homeType,
+  }) async {
+    final response = await http.post(
+      Uri.parse(ApiUrl.bookRide),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({
+        'isLogin': isLogin,
+        'date': date,
+        'office_id': officeId,
+        'timeslot_id': timeslotId,
+        'home_type': homeType,
+      }),
+    );
+
+    return jsonDecode(response.body);
+  }
 }

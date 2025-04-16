@@ -28,6 +28,7 @@ class ApiUrl {
   static const String userUploadDocs = '$baseUrl/auth/user/uploadDocs';
   static const String userDetails = '$baseUrl/auth/user/details';
   static const String userAddress = '$baseUrl/auth/user/address';
+  static const String bookRide = '$baseUrl/auth/user/bookRide';
 
   // Driver Endpoints
   static const String driverRegister = '$baseUrl/auth/driver/register';
