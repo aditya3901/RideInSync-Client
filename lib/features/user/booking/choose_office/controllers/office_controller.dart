@@ -20,6 +20,17 @@ class OfficeController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     final userModel = UserModel.fromJson(jsonDecode(prefs.getString('user')!));
 
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        Get.snackbar(
+          "Location Permission Denied",
+          "Please enable location permissions",
+        );
+        return;
+      }
+    }
     final currentPosition = await Geolocator.getCurrentPosition();
 
     final officeResponse = await _bookingService.getNearbyOffice(

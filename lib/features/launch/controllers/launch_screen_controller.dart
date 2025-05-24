@@ -42,7 +42,7 @@ class LaunchScreenController extends GetxController {
 
     final reqBody = {
       'email': email,
-      'deviceId': deviceId,
+      'deviceID': deviceId,
       'deviceType': deviceType,
       'deviceToken': deviceFCMToken,
     };

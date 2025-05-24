@@ -17,7 +17,10 @@ class TimeslotController extends GetxController {
       date: _bookingController.selectedDate.toString().split(' ')[0],
       officeId: _bookingController.selectedOffice!.sId!,
       type: _bookingController.isLogin! ? 'login' : 'logout',
-      userTime: _bookingController.selectedDate.toString().split(' ')[1],
+      userTime: _bookingController.selectedDate
+          .toString()
+          .split(' ')[1]
+          .substring(0, 5),
     );
 
     if (timeslotResponse["status"] == "success") {
