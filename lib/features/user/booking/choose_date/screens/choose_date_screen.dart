@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import '..//controllers/date_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class BookScheduleScreen extends StatefulWidget {
-  const BookScheduleScreen({Key? key}) : super(key: key);
+class ChooseDateScreen extends StatefulWidget {
+  const ChooseDateScreen({Key? key}) : super(key: key);
 
   @override
-  State<BookScheduleScreen> createState() => _BookScheduleScreenState();
+  State<ChooseDateScreen> createState() => _ChooseDateScreenState();
 }
 
-class _BookScheduleScreenState extends State<BookScheduleScreen> {
+class _ChooseDateScreenState extends State<ChooseDateScreen> {
   final dateController = Get.put(DateController());
 
   @override

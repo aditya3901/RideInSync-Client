@@ -58,4 +58,18 @@ class BookingService {
 
     return jsonDecode(response.body);
   }
+
+  Future<Map<String, dynamic>> getUserRides({
+    required String token,
+  }) async {
+    final response = await http.get(
+      Uri.parse(ApiUrl.getRides),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    return jsonDecode(response.body);
+  }
 }

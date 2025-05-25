@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:rideinsync_client/models/ride_model.dart';
 import './location_joiner.dart';
 import './ride_buttons.dart';
 
 class RideCard extends StatefulWidget {
-  const RideCard({Key? key}) : super(key: key);
+  final RideModel ride;
+  const RideCard({Key? key, required this.ride}) : super(key: key);
 
   @override
   State<RideCard> createState() => _RideCardState();
@@ -36,9 +38,9 @@ class _RideCardState extends State<RideCard> {
                     children: [
                       const Icon(Icons.login, color: Colors.black54),
                       const SizedBox(width: 4),
-                      const Text(
-                        "Login",
-                        style: TextStyle(
+                      Text(
+                        widget.ride.type.toUpperCase(),
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -83,7 +85,7 @@ class _RideCardState extends State<RideCard> {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        "Scheduled",
+                        widget.ride.status.toUpperCase(),
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.deepPurple[300],
@@ -101,12 +103,12 @@ class _RideCardState extends State<RideCard> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     LocationJoiner(
-                      fromAddress: "fromAddress",
-                      toAddress: "toAddress",
+                      fromAddress: widget.ride.rideStartLocation.address,
+                      toAddress: widget.ride.rideEndLocation.address,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     RideButtons(),
                   ],
                 ),

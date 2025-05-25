@@ -19,6 +19,8 @@ class ApiUrl {
   static const String getCompanies = '$baseUrl/admin/company';
   static const String getOffices = '$baseUrl/admin/office/nearby';
   static const String getTimeslots = '$baseUrl/admin/timeslots';
+  static const String bookRide = '$baseUrl/booking/rides';
+  static const String getRides = '$baseUrl/booking/rides/me';
 
   // User Endpoints
   static const String userRegister = '$baseUrl/auth/user/register';
@@ -28,7 +30,6 @@ class ApiUrl {
   static const String userUploadDocs = '$baseUrl/auth/user/docs/upload';
   static const String userDetails = '$baseUrl/auth/user/details';
   static const String userAddress = '$baseUrl/auth/user/address';
-  static const String bookRide = '$baseUrl/auth/user/bookRide';
 
   // Driver Endpoints
   static const String driverRegister = '$baseUrl/auth/driver/register';

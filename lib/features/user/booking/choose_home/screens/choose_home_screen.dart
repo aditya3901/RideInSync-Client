@@ -125,7 +125,9 @@ class _ChooseHomeScreenState extends State<ChooseHomeScreen> {
                     margin: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 10),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.bookRide();
+                      },
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
                         minimumSize: const Size(double.infinity, 45),
@@ -134,7 +136,7 @@ class _ChooseHomeScreenState extends State<ChooseHomeScreen> {
                         ),
                       ),
                       child: const Text(
-                        "Next",
+                        "Book Ride",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

@@ -15,6 +15,12 @@ class _UserScheduleRidesState extends State<UserScheduleRides> {
   final _controller = Get.put(RidesController());
 
   @override
+  void initState() {
+    super.initState();
+    _controller.getRides();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const UserDrawer(),
@@ -33,12 +39,21 @@ class _UserScheduleRidesState extends State<UserScheduleRides> {
           ),
         ],
       ),
-      body: Column(
-        children: const [
-          RideCard(),
-          RideCard(),
-        ],
-      ),
+      body: Obx(() {
+        if (_controller.isLoading.value) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (_controller.rides.isEmpty) {
+          return const Center(child: Text("No rides found"));
+        }
+        return ListView.builder(
+          itemCount: _controller.rides.length,
+          itemBuilder: (context, index) {
+            final ride = _controller.rides[index];
+            return RideCard(ride: ride);
+          },
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _controller.scheduleRide();
