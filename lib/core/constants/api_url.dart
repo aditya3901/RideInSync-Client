@@ -1,8 +1,8 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ApiUrl {
-  static const String baseUrl = 'https://rideinsync-gateway.onrender.com';
-  // static const String baseUrl = 'http://192.168.29.10:3000';
+  // static const String baseUrl = 'https://rideinsync-gateway.onrender.com';
+  static const String baseUrl = 'http://192.168.29.89:3000';
 
   // Common Endpoints
   static final String cloudinaryUpload =
@@ -20,7 +20,7 @@ class ApiUrl {
   static const String getOffices = '$baseUrl/admin/office/nearby';
   static const String getTimeslots = '$baseUrl/admin/timeslots';
   static const String bookRide = '$baseUrl/booking/rides';
-  static const String getRides = '$baseUrl/booking/rides/me';
+  static const String getRides = '$baseUrl/booking/rides/user/upcoming';
 
   // User Endpoints
   static const String userRegister = '$baseUrl/auth/user/register';
